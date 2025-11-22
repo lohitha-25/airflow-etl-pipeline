@@ -1,0 +1,7 @@
+logs/
+airflow_data/
+__pycache__/
+*.pyc
+*.env
+.DS_Store
+Thumbs.db

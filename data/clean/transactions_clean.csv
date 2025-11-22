@@ -1,0 +1,6 @@
+id,amount,location,is_suspicious
+1,20000,Hyderabad,False
+2,70000,Mumbai,True
+3,35000,Delhi,False
+4,90000,Bengaluru,True
+5,150000,Chennai,True
