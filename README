@@ -1,15 +1,46 @@
-# Airflow ETL Pipeline
+# Airflow ETL Pipeline: Transaction Fraud Detection
 
-The **Airflow ETL Pipeline** project automates the process of extracting, transforming, and loading transaction data using Apache Airflow. The pipeline processes financial transaction data, cleans the data, applies fraud detection logic, and generates analytical summaries.
+An automated ETL pipeline that ingests financial transaction data, cleans and transforms it, flags suspicious transactions, loads everything into PostgreSQL, and visualizes results in a Streamlit dashboard. Orchestrated with Apache Airflow and fully containerized with Docker.
 
-## Technologies Used
+## Pipeline Architecture
 
-* Apache Airflow
-* Python
-* Pandas
-* Docker
-* Docker Compose
-* PostgreSQL
+```
+Raw CSV → Ingest → Clean → Transform → Fraud Flags → PostgreSQL → Streamlit Dashboard
+                  (Apache Airflow DAGs orchestrate every step)
+```
+
+## Dashboard
+
+![Dashboard Screenshot](docs/dashboard.png)
+
+> Suspicious vs normal transactions at a glance.
+
+## Tech Stack
+
+| Area | Tools |
+|---|---|
+| Orchestration | Apache Airflow |
+| Language / Processing | Python, Pandas |
+| Database | PostgreSQL |
+| Visualization | Streamlit |
+| Containerization | Docker, Docker Compose |
+
+## Features
+
+* Automated ETL workflow built with Airflow DAGs (ingest, clean, transform, load)
+* Data cleaning and transformation using Python and Pandas
+* Rule-based fraud detection that flags suspicious transactions
+* Summary analytics reports generated after each run
+* Streamlit dashboard comparing suspicious vs normal transactions
+* One-command setup with Docker Compose
+
+## Fraud Detection Logic
+
+Transactions are flagged as suspicious when they match rules such as:
+
+* Amount above **[X]** threshold
+* Unusually high transaction frequency in a short window
+* **[add your other rule here]**
 
 ## Project Structure
 
@@ -23,51 +54,38 @@ airflow-etl-pipeline
 └── .gitignore
 ```
 
-## Features
+## Getting Started
 
-* Automated ETL workflow using Airflow DAGs
-* Data cleaning and transformation using Python and Pandas
-* Fraud detection logic for suspicious transactions
-* Containerized environment using Docker
-* Workflow orchestration with Airflow scheduler
+### Prerequisites
 
-## Setup Instructions
+* Docker and Docker Compose installed
 
-### 1. Clone the repository
+### Run it
 
-```
+```bash
 git clone https://github.com/lohitha-25/airflow-etl-pipeline.git
-```
-
-### 2. Navigate to the project folder
-
-```
 cd airflow-etl-pipeline
+docker compose up -d
 ```
 
-### 3. Run the application using Docker
+(Older Docker versions: use `docker-compose up -d`.)
 
-```
-docker-compose up
-```
+### Access
 
-### 4. Access Airflow UI
+* **Airflow UI:** http://localhost:8080
+  Login: `airflow` / `airflow` *(update if your setup uses different credentials)*
+* **Streamlit Dashboard:** http://localhost:8501 *(update the port if different)*
 
-Open in browser:
-
-```
-http://localhost:8080
-```
+Then enable the DAG in the Airflow UI and trigger a run.
 
 ## Future Improvements
 
-* Add real-time streaming data pipeline
-* Implement advanced fraud detection models
-* Deploy pipeline on cloud platforms like AWS or GCP
-* Add monitoring and alerting systems
+* Real-time streaming pipeline (Kafka)
+* Advanced ML-based fraud detection models
+* Cloud deployment on AWS or GCP
+* Monitoring and alerting
 
 ## Author
 
 **Lohitha Emmadisetty**
-
-GitHub: https://github.com/lohitha-25
+[GitHub](https://github.com/lohitha-25) | [LinkedIn](https://linkedin.com/in/Lohitha)
